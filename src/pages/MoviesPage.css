@@ -1,0 +1,83 @@
+.movies-page {
+  padding: 24px 48px 48px;
+}
+
+.filters-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  justify-content: space-between;
+
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ffffff;
+
+  margin-left: -48px;
+  margin-right: -48px;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+.search-box {
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-box input {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  width: 100%;
+  box-sizing: border-box;
+  background: white;
+  color: #191919;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  /* exactly 4 per row on wide screens */
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* 3 per row on medium screens */
+@media (max-width: 1200px) {
+  .movies-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 2 per row on tablets */
+@media (max-width: 900px) {
+  .movies-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 1 per row on small phones */
+@media (max-width: 600px) {
+  .movies-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info,
+.error {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 24px;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+.date-picker-input {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: none;
+  min-width: 100px;
+  background: #ffffff;
+  color: #111;
+  text-align: center;
+  cursor: pointer;
+}

@@ -1,0 +1,9 @@
+.dashboard-page {
+    padding: 48px;
+    color: #f5f5f5;
+  }
+  
+  .dashboard-page h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
