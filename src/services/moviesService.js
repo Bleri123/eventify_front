@@ -1,3 +1,4 @@
+// src/services/moviesService.js
 import { apiClient } from '../utils/apiClient'
 
 export const getGenres = async () => {
@@ -16,5 +17,22 @@ export const getMovies = async (filters) => {
   params.status = 'now_showing'
 
   const { data } = await apiClient.get('/movies', { params })
+  return data
+}
+
+// Add this new function
+export const getMovieById = async (movieId, date) => {
+  const params = date ? { date } : {}
+  const { data } = await apiClient.get(`/movies/${movieId}`, { params })
+  return data
+}
+
+export const getScreeningById = async (screeningId) => {
+  const { data } = await apiClient.get(`/screenings/${screeningId}`)
+  return data
+}
+
+export const getSeatsForScreening = async (screeningId) => {
+  const { data } = await apiClient.get(`/screenings/${screeningId}/seats`)
   return data
 }

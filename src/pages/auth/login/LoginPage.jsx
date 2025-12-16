@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { login, getUserProfile } from '../../../services/authService'
 import { setAuthToken } from '../../../utils/apiClient'
 import './LoginPage.css'
 
 function LoginPage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -24,14 +25,16 @@ function LoginPage() {
       // Get user profile to check role
       const user = await getUserProfile()
 
+      const from = location.state?.from?.pathname || '/'
+
       // Redirect based on role
       if (user.role === 'admin') {
         navigate('/dashboard')
       } else {
-        // User stays on movies page (or redirect to home)
-        navigate('/')
+        navigate(from, { replace: true })
       }
     } catch (err) {
+      console.error('Login error:', err) 
       setError(err?.response?.data?.error || 'Login failed. Please check your credentials.')
     } finally {
       setLoading(false)

@@ -18,6 +18,25 @@ apiClient.interceptors.request.use((config) => {
   return config
 })
 
+// Handle 401 responses (expired/invalid token)
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token is expired or invalid, remove it
+      localStorage.removeItem('auth_token')
+      
+      // Only redirect if not already on login/register page
+      const currentPath = window.location.pathname
+      if (currentPath !== '/login' && currentPath !== '/register') {
+        // Redirect to login page
+        window.location.href = '/login'
+      }
+    }
+    return Promise.reject(error)
+  }
+)
+
 // Store token helper
 export const setAuthToken = (token) => {
   if (token) {
